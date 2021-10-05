@@ -19,6 +19,8 @@ Ishida, Takeshi, Hindawi Discrete Dynamics in Nature and Society (January 28, 20
 
 This paper presents a CA-like model of a simplified Turning pattern model which can produce the characteristic spots and stripes while also being able to support Turing instability. On a hexagonal grid, the model employs a different approach to pattern formation that uses  only one type of token. Cells exchange integer values with only adjacent cells, and tokens increase in value as they move. Some token movement is determined by the global algorithm rather than the local, differentiating the model from a typical CA structure. Ishida proposes the application of this model to IOT devices to control data traffic.
 
+<br/>
+
 <ins>Class of Cellular Automata for Reaction-Diffusion Systems</ins>
 
 Weimar, Jörg R.; Boon, Jean-Pierre, Physical Review (May 22, 1993) 49 1749-1752
