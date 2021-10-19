@@ -34,11 +34,30 @@ The black cells act as sources for tokens, with *b* initial tokens on a black ce
 
 We're implementing our variation on the model using a square grid, where tokens spread to the neighboring eight cells rather than six, as in the hexagonal. 
 
+- Include snippets of our implementation and compare it to the explanation of their experiment.
+
 ## Results
 
-v different
+For the results, we are expecting a different outcome from the standard reaction-diffusion model. The reason for this is because we are doing two modifcations that are likely to have a significant impact on the model behavior. The first is that we are using a hexagonal grid, rather than a rectangular. The second is that we are using tokens which affect the reaction radius of each cell. As a consequence of this, we will have additional parameters over the standard reaction-diffusion model, but this will also allow us to observe more effects of variable modifications.
+
+One possible manner we can display the results of our two models is through a grid of examples. We can show a row of a variety of tunings for the shared parameters between the models. For the additional parameters, we can provide examples of the new model as columns below the rows. This would create a visually interpretable breakdown of the differences between the models.
+
+We have a diffusion-reaction model implementation of a hexagonal grid and a rectangular grid, and the results alone from these models vary quite a bit. However, we are still in the process of implmenting the token function that is described in the paper. We believe that it will yield even more interesting results.
+
+The following images are of the following parameters: a grid size of 300 x 300, diffusion rate a: 0.5, diffusion rate b: 0.25, feed rate 0.02, kill rate: 0.05, and starting noise with the range of 0 - 0.1. 
+
+![](.\images\normal_rectangular.png)
+
+The image above displays the results using a rectangular grid, where the chemical diffuses equally in all 4 directions.
+
+![](.\images\normal_hex.png)
+
+The image above displays the results using a hexagonal grid, there the chemical diffuses equally in all 6 directions.
+
+As you can see, the results are quite different, and both are interesting in their own way. We look forward to completing Ishida's model to view the results of a different abstraction of reaction-diffusion.
 
 ## Conclusions
 
- 
+ We believe that Ishida's model provides a more true-to-life implementation of the standard reaction-diffusion model. The primary effect is that it accounts for various intensities of reactions. This is interpreted as one chemical being able to react with different behavior, according to a different underlying driving factor. An example of this is having a chemical reaction occuring on an unevenly heated surface.
 
+Here we will explain our takes on why the differences are what they are and possible applications of each of these models across various disciplines, even though they were originally modeled after an idea in mind. It is likely that we can observe the pattern from this model in other areas of life as well.

@@ -21,6 +21,19 @@ class reaction_diffusion:
         self.kernel = np.array([[0, 0.25, 0],
                                 [0.25,-1, 0.25],
                                 [0, 0.25, 0]])
+        # self.kernel = np.array([[0, 0.167, 0.167],
+        #                         [0.167,-1, 0.167],
+        #                         [0, 0.167, 0.167]])
+        # self.kernel = np.array([[0, 0.167, 0.167, 0.167, 0.167, 0],
+        #                         [0, 0.167, 0.167, 0.167, 0.167, 0],
+        #                         [0.167, 0.167, -1, -1, 0.167, 0.167],
+        #                         [0.167, 0.167, -1, -1, 0.167, 0.167],
+        #                         [0, 0.167, 0.167, 0.167, 0.167, 0],
+        #                         [0, 0.167, 0.167, 0.167, 0.167, 0]])
+        # self.kernel = np.array([[0, 0.167, 0.167, 0],
+        #                         [0.167,-1, 0.167, 0],
+        #                         [0.167,-1, 0.167, 0],
+        #                         [0, 0.167, 0.167, 0]])
 
     def step(self):
         a1 = self.array1
@@ -37,7 +50,7 @@ class reaction_diffusion:
         self.array2 += self.diff_rate_b * c2 + reaction - (self.feed_rate + self.kill_rate) * a2
 
 
-a = reaction_diffusion(200, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.02, kill_rate=0.05, noise=0.1)
+a = reaction_diffusion(300, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.02, kill_rate=0.05, noise=0.1)
 for i in range(1500):
     a.step()
 # plt.imshow(a.array1, cmap='Greys')
