@@ -28,11 +28,13 @@ We're exploring this choice - investigating what effects a different grid shape 
 
 In the Ishida Model, there are two possible states a cell can be in (black and white), and each cell can contain tokens that are labeled with integer values and passed between cells. Each time a token moves, it's value increases by one, as seen in the figure below.
 
-![](.\images\hex_grid.PNG)
+
+
+![Hex Grid](.\images\hex_grid.PNG)
 
 The black cells act as sources for tokens, with *b* initial tokens on a black cell at each time step. At each time step, the tokens are distributed. The residual token ratio *r* is the fraction of unmoved tokens in each cell. Where *b(n,t)* is the numbers of tokens in cell *n* at time *t*, *b(n,t)* x (1 - *r*) x 6/7 of the tokens diffuse towards the six adjacent cells evenly. The remaining proportion, *b(n,t)* x (1 - *r*) x 1/7 are incremented by one, despite not moving. The residual *b(n,t)* x *r* remain unchanged in the cell, as shown in the Figure below. If the number of tokens is not an integer multiple of 7, the remainder of the tokens are distributed with equal probability. The incremental labeling in each timestep is repeated until the maximum number *X* is reached. If there are fewer than *b(n,t)* x *d* tokens in a cell, where *d* is dissipation rate, those tokens are removed from the cell. After the movement of tokens at each time step, the state of each cell for the next step is determined by the fraction of "younger" tokens that it contains. The ratio of the number of tokens labeled equal or less than *X* / 2 is used to determine the subsequent cell state. 
 
-![](.\images\token_distribution.PNG)
+![Time Step](.\images\token_distribution.PNG)
 
 We're implementing our variation on the model using a square grid, where tokens spread to the neighboring eight cells rather than six, as in the hexagonal. We will also try a third approach, in which tokens are spread to the neighboring four cells directly adjacent. 
 
@@ -48,11 +50,11 @@ We have a diffusion-reaction model implementation of a hexagonal grid and a rect
 
 The following images are of the following parameters: a grid size of 300 x 300, diffusion rate a: 0.5, diffusion rate b: 0.25, feed rate 0.02, kill rate: 0.05, and starting noise with the range of 0 - 0.1. 
 
-![](.\images\normal_rectangular.png)
+![Normal Rect](.\images\normal_rectangular.png)
 
 The image above displays the results using a rectangular grid, where the chemical diffuses equally in all 4 directions.
 
-![](.\images\normal_hex.png)
+![Normal Hex](.\images\normal_hex.png)
 
 The image above displays the results using a hexagonal grid, there the chemical diffuses equally in all 6 directions.
 
