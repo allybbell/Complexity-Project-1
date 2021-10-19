@@ -54,7 +54,7 @@ The following images are of the following parameters: a grid size of 300 x 300, 
 
 The image above displays the results using a rectangular grid, where the chemical diffuses equally in all 4 directions.
 
-![Normal Hex](.\images\normal_hex.png)
+![Normal Hex](images\normal_hex.png)
 
 The image above displays the results using a hexagonal grid, there the chemical diffuses equally in all 6 directions.
 
