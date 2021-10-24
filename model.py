@@ -11,6 +11,11 @@ def add_island(array, dim, height=0.1):
             array[i][ii] += height
 
 class reaction_diffusion:
+    """
+    This is a standard implementation of a reaction-diffusion model, some of the code is pulled from the
+    "Think Complexity" book. This model uses a rectangular grid, or if using a different kernel, can
+    simulate using a hexagonal grid.
+    """
     def __init__(self, dim, island_dim=10, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.035, kill_rate=0.057, noise=0.1):
         self.diff_rate_a = diff_rate_a
         self.diff_rate_b = diff_rate_b
@@ -37,6 +42,13 @@ class reaction_diffusion:
         self.array2 += self.diff_rate_b * c2 + reaction - (self.feed_rate + self.kill_rate) * a2
 
 class token_reaction_diffusion:
+    """
+    This model is implemented to use tokens. The implementation is based on my (Yehya) interpretation
+    of the paper we are basing the project off of. There are the reaction-diffusion arrays, but there
+    is also an underlying token array. Using a custom implementation of correlate2d, the reaction-diffusion
+    model operated on whatever kernel is specified by the token array. The tokens also move around, according 
+    to a kernel.
+    """
     def __init__(self, dim, island_dim=10, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.035, kill_rate=0.057, noise=0.1, token_range=2):
         self.diff_rate_a = diff_rate_a
         self.diff_rate_b = diff_rate_b
@@ -149,6 +161,7 @@ class token_reaction_diffusion:
 # plt.imshow(a.array2 - a.array1, cmap='Blues')
 # plt.show()
 
+# Reaction diffusion presentation using tokens
 a = token_reaction_diffusion(50)
 for i in range (5):
     print(a.token_array)
@@ -158,6 +171,7 @@ for i in range (5):
 plt.imshow(a.array2 - a.array1, cmap='Blues')
 plt.show()
 
+# reaction diffusion presentation without tokens
 # a = reaction_diffusion(50)
 # for i in range(200):
 #     a.step()
