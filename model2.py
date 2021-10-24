@@ -43,7 +43,14 @@ def var_correlate2d(array, kernel_list, token_array):
 
             idx_col += 1
         idx_row += 1
-    return result
+
+    # Applying kernel to the token array
+    kernel = np.array([[0, 0.25, 0],
+                       [0.25,-1, 0.25],
+                       [0, 0.25, 0]])
+
+    new_token_array = correlate2d(token_array, kernel, mode='same')
+    return result, new_token_array
 
 array = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
          [0, 0, 0, 0, 0, 0, 0, 0, 0],
