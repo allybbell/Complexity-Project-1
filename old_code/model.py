@@ -2,7 +2,6 @@ from scipy.signal import correlate2d
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 
 def add_island(array, dim, height=0.1):
     dim = dim // 2
@@ -12,11 +11,6 @@ def add_island(array, dim, height=0.1):
             array[i][ii] += height
 
 class reaction_diffusion:
-    """
-    This is a standard implementation of a reaction-diffusion model, some of the code is pulled from the
-    "Think Complexity" book. This model uses a rectangular grid, or if using a different kernel, can
-    simulate using a hexagonal grid.
-    """
     def __init__(self, dim, island_dim=10, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.035, kill_rate=0.057, noise=0.1):
         self.diff_rate_a = diff_rate_a
         self.diff_rate_b = diff_rate_b
@@ -25,12 +19,12 @@ class reaction_diffusion:
         self.array1 = np.ones((dim, dim))
         self.array2 = noise * np.random.random((dim, dim))
         add_island(self.array2, island_dim)
-        # self.kernel = np.array([[0, 0.25, 0],
-        #                         [0.25,-1, 0.25],
-        #                         [0, 0.25, 0]])
-        self.kernel = np.array([[0, 0.167, 0.167],
-                                [0.167,-1, 0.167],
-                                [0, 0.167, 0.167]])
+        self.kernel = np.array([[0, 0.25, 0],
+                                [0.25,-1, 0.25],
+                                [0, 0.25, 0]])
+        # self.kernel = np.array([[0, 0.167, 0.167],
+        #                         [0.167,-1, 0.167],
+        #                         [0, 0.167, 0.167]])
 
     def step(self):
         a1 = self.array1
@@ -43,13 +37,6 @@ class reaction_diffusion:
         self.array2 += self.diff_rate_b * c2 + reaction - (self.feed_rate + self.kill_rate) * a2
 
 class token_reaction_diffusion:
-    """
-    This model is implemented to use tokens. The implementation is based on my (Yehya) interpretation
-    of the paper we are basing the project off of. There are the reaction-diffusion arrays, but there
-    is also an underlying token array. Using a custom implementation of correlate2d, the reaction-diffusion
-    model operated on whatever kernel is specified by the token array. The tokens also move around, according 
-    to a kernel.
-    """
     def __init__(self, dim, island_dim=10, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.035, kill_rate=0.057, noise=0.1, token_range=2):
         self.diff_rate_a = diff_rate_a
         self.diff_rate_b = diff_rate_b
@@ -77,6 +64,17 @@ class token_reaction_diffusion:
                                       [0, 0, 0, 0.083, 0, 0, 0],
                                       [0, 0, 0, 0.083, 0, 0, 0],
                                       [0, 0, 0, 0.083, 0, 0, 0]], dtype=float)]
+        # self.kernel_list = [np.array([[0, 0.25, 0],
+        #                               [0.25,-1, 0.25],
+        #                               [0, 0.25, 0]], dtype=float),
+                                    
+        #                     np.array([[0, 0.125, 0],
+        #                               [0.125,-1, 0.125],
+        #                               [0, 0.125, 0]], dtype=float),
+                                    
+        #                     np.array([[0, 0.083, 0],
+        #                               [0.083,-1, 0.083],
+        #                               [0, 0.083, 0]], dtype=float)]
 
     def var_correlate2d(self, array, kernel_list, token_array):
         array_len = len(array)
@@ -106,6 +104,16 @@ class token_reaction_diffusion:
                 if (array_len - idx_row - 1) < hkb:
                     hkb = array_len - (idx_row + 1)
                 temp_kernel = np.array([i[hk-hkl:hk+hkr+1] for i in kernel[hk-hkt:hk+hkb+1]], dtype=float)
+
+                # print(idx_row, idx_col, temp_kernel.shape, np.array([i[idx_col-hkl:idx_col+hkr+1] for i in array[idx_row-hkt:idx_row+hkb+1]], dtype=float).shape)
+                # if (idx_row == 4) and (idx_col == 4):
+                #     window = np.array([i[idx_col-hkl:idx_col+hkr+1] for i in array[idx_row-hkt:idx_row+hkb+1]])
+                #     print(window)
+                #     print((temp_kernel))
+                #     print(window*kernel)
+                #     print(sum(sum(window*kernel)))
+                #     # print(result)
+                #     # return
                 val = sum(sum(np.array([i[idx_col-hkl:idx_col+hkr+1] for i in array[idx_row-hkt:idx_row+hkb+1]], dtype=float) * temp_kernel))
                 result[idx_row][idx_col] = val
 
@@ -127,23 +135,32 @@ class token_reaction_diffusion:
         c2, self.token_array = self.var_correlate2d(a2, self.kernel_list, self.token_array)
         self.token_array = np.array([[int(ii % self.token_range) for ii in i] for i in self.token_array])
         # self.token_array = np.array([[(0 if ii >= self.token_range else ii) for ii in i] for i in self.token_array])
+
+
         reaction = a1 * a2**2
         self.array1 += self.diff_rate_a * c1 - reaction + self.feed_rate * (1 - a1)
         self.array2 += self.diff_rate_b * c2 + reaction - (self.feed_rate + self.kill_rate) * a2
 
 
-# Plotting the model over a set of parameters
-fig = plt.figure()
-frames = []
-a = reaction_diffusion(200, diff_rate_a=0.2, diff_rate_b=0.1, feed_rate=0.02, kill_rate=0.08, noise=0.1)
-for i in range(15000):
-    a.step()
-    if i % 15 == 0:
-        frames.append([plt.imshow(a.array2 - a.array1, cmap='Blues', animated=True)])
-# plt.imshow(a.array1, cmap='Greys')
+# a = reaction_diffusion(300, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.02, kill_rate=0.05, noise=0.1)
+# for i in range(1500):
+#     a.step()
+# # plt.imshow(a.array1, cmap='Greys')
 # plt.imshow(a.array2 - a.array1, cmap='Blues')
+# plt.show()
 
-ani = animation.ArtistAnimation(fig, frames, interval=10, blit=True, repeat_delay=1000)
-writergif = animation.PillowWriter(fps=30)
-ani.save("hex6.gif", writer=writergif)
+a = token_reaction_diffusion(50)
+for i in range (5):
+    print(a.token_array)
+    print(a.array1)
+    a.step()
+# print(a.token_array)
+plt.imshow(a.array2 - a.array1, cmap='Blues')
 plt.show()
+
+# a = reaction_diffusion(50)
+# for i in range(200):
+#     a.step()
+# # print(a.token_array)
+# plt.imshow(a.array2 - a.array1, cmap='Blues')
+# plt.show()
