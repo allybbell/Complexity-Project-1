@@ -24,7 +24,7 @@ Many different types of CA models attempt to replicate these patterns. In the pa
 
 We're exploring this choice - investigating what effects a different grid shape have on the emerging patterns and how this compares to the results Ishida arrived at. One of Ishida's points focuses on how hexagonal grids are isotropic, and square grids are not, as shown in the figure below. 
 
-![grid distance](.\image library\grid distance.PNG )
+![grid distance](./image library/grid distance.PNG )
 
 His other explanation of reasoning is also based on cell neighborhoods, and a hexagonal grid allows for the simplification of that. 
 
@@ -90,7 +90,7 @@ Fifth Parameters
 
 In the results produced, we don't see as distinct of patterns emerge in the hexagonal grids. We instead see series of lines emerging, forming from crescent like shapes that grow and move only in one direction. This distinctly does not match the animal like patterns that emerge in our square grid models, as seen in classical Turing pattern examples, as shown below.
 
-![grid distance](.\images\turing_pattern.PNG )
+![grid distance](./images/turing_pattern.PNG )
 
 In contrast to this, almost all examples of Turing patterns in nature emerge in isometric grids, as takes place in hexagonal models. Cells form in in hexagonal patterns, each in contact with six others. Here, we see an example of hexagonal grids in the cells of onion cells and plant cells.
 
@@ -105,7 +105,7 @@ The wavelike pattern seen in the hexagonal models may mimic biological mechanism
 
 
 
-![fungi](.\image library\fungi.gif)
+![fungi](./image library/fungi.gif)
 
 
 
