@@ -24,7 +24,7 @@ Many different types of CA models attempt to replicate these patterns. In the pa
 
 We're exploring this choice - investigating what effects a different grid shape have on the emerging patterns and how this compares to the results Ishida arrived at. One of Ishida's points focuses on how hexagonal grids are isotropic, and square grids are not, as shown in the figure below. 
 
-![grid distance](./image library/grid distance.PNG )
+![grid distance](./report_images/grid_distance.PNG )
 
 His other explanation of reasoning is also based on cell neighborhoods, and a hexagonal grid allows for the simplification of that. 
 
@@ -41,46 +41,52 @@ Below are some animations of rectangular (left) and hexagonal (right) plots of e
 
 
 <p float="left">
-  <img src="./image library/hex0.gif" width="45%" />
-  <img src="./image library/rec0.gif" width="45%" /> 
+  <img src="./report_images/hex0.gif" width="45%" />
+  <img src="./report_images/rec0.gif" width="45%" /> 
 </p>
+
 
 Default parameters: island_dim=10, diff_rate_a=0.5, diff_rate_b=0.25, feed_rate=0.035, kill_rate=0.057, noise=0.1
 
 <p float="left">
-  <img src="./image library/hex1.gif" width="45%" />
-  <img src="./image library/rec1.gif" width="45%" /> 
+  <img src="./report_images/hex1.gif" width="45%" />
+  <img src="./report_images/rec1.gif" width="45%" /> 
 </p>
+
 
 First Parameters: diff_rate_a=0.2, diff_rate_b=0.1, feed_rate=0.015, kill_rate=0.05, noise=0.1
 
 <p float="left">
-  <img src="./image library/hex2.gif" width="45%" />
-  <img src="./image library/rec2.gif" width="45%" /> 
+  <img src="./report_images/hex2.gif" width="45%" />
+  <img src="./report_images/rec2.gif" width="45%" /> 
 </p>
+
 
 Second Parameters
 
 <p float="left">
-  <img src="./image library/hex3.gif" width="45%" />
-  <img src="./image library/rec3.gif" width="45%" /> 
+  <img src="./report_images/hex3.gif" width="45%" />
+  <img src="./report_images/rec3.gif" width="45%" /> 
 </p>
+
 
 
 
 Third Parameters
 
 <p float="left">
-  <img src="./image library/hex4.gif" width="45%" />
-  <img src="./image library/rec4.gif" width="45%" /> 
+  <img src="./report_images/hex4.gif" width="45%" />
+  <img src="./report_images/rec4.gif" width="45%" /> 
 </p>
+
 
 Fourth Parameters
 
 <p float="left">
-  <img src="./image library/hex5.gif" width="45%" />
-  <img src="./image library/rec5.gif" width="45%" /> 
+  <img src="./report_images/hex5.gif" width="45%" />
+  <img src="./report_images/rec5.gif" width="45%" /> 
 </p>
+
 
 Fifth Parameters
 
@@ -105,7 +111,7 @@ The wavelike pattern seen in the hexagonal models may mimic biological mechanism
 
 
 
-![fungi](./image library/fungi.gif)
+![fungi](./report_images/fungi.gif)
 
 
 
